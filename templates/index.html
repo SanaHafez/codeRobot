@@ -22,12 +22,13 @@
 		background:#ffec64 100%; background-color:#00aca4;
 	}
 	.mredb{background-color:#ac2500}
-	.cent{background-color:#0079ad}
+	.cam{background-color:#4777c9}
+	.cent{background-color:#408c99}
 	button{
 		box-shadow: 0px 1px 0px 0px #f7c5c0;
-		background-color:#44c767;
+		background-color:#1bb17d;
 		border-radius:28px;
-		border:1px solid #18ab29;
+		border:1px solid #37a718;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
@@ -40,7 +41,8 @@
 	}
 
 	button:hover {
-		background:#ffec64 100%;background-color:#ffab23;
+		background:linear-gradient(to top, #ec9e21 5%, #ffba2f 100%);
+	background-color:#ffab23;
 	}
 	button:active {
 		position:relative;top:1px;
@@ -57,14 +59,14 @@
  	<form action="/" method="POST">
 		<h4>Camera</h4>
 	<h5> Pan: [ {{ panServoAngle }} ], Tilt:  [ {{ tiltServoAngle }} ] (Degrees)  </h5> 
-		<button name="action" type="submit" value="tiltup">Up</button>
+		<button class="cam" name="action" type="submit" value="tiltup">Up</button>
 		<br>
 		<h2>
-		<button name="action" type="submit" value="panleft">Left</button>
+		<button class="cam" name="action" type="submit" value="panleft">Left</button>
 		<button class="cent" name="action" type="submit" value="center">Center</button>
-		<button name="action" type="submit" value="panright">Right</button>  
+		<button class="cam" name="action" type="submit" value="panright">Right</button>  
 	</h2>
-		<button name="action" type="submit" value="tiltdown">Down</button> 
+		<button class="cam" name="action" type="submit" value="tiltdown">Down</button> 
 		 
 
 	 <h4> Camera: 
