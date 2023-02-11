@@ -2,7 +2,7 @@
 install flask using:
 $ sudo pip install flask
 
-Go to directory of the code
+Go to directory of the code then
 Run using : 
 $ python robotcode.py
 
