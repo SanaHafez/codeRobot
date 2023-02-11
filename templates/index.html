@@ -57,15 +57,15 @@
  	<form action="/" method="POST">
 		<h4>Camera</h4>
 	<h5> Pan: [ {{ panServoAngle }} ], Tilt:  [ {{ tiltServoAngle }} ] (Degrees)  </h5> 
-		<h4><button name="action" type="submit" value="tiltup">Up</button> </h4>
+		<button name="action" type="submit" value="tiltup">Up</button>
 		<br>
+		<h2>
 		<button name="action" type="submit" value="panleft">Left</button>
 		<button class="cent" name="action" type="submit" value="center">Center</button>
 		<button name="action" type="submit" value="panright">Right</button>  
-
-	<h2> 
+	</h2>
 		<button name="action" type="submit" value="tiltdown">Down</button> 
-		 </h2>
+		 
 
 	 <h4> Camera: 
 		<button name="action" type="submit" value="ledoff">Off</button>  [ {{ led }} ]
