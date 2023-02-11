@@ -80,6 +80,7 @@ def stepper():
     elif current == sensorUP:
         sensorGoesUp()
         current = sensorIdle
+
 def drive():
     global current
     global current1
@@ -88,11 +89,11 @@ def drive():
         motor1.stop()
         motor2.stop()
     elif current == Forward:
-        current1='Idle'
+        current1='Forward'
         motor1.forward(speed=1)
         motor2.forward(speed=1)
     elif current == Backward:
-        current1='Forward'
+        current1='Backward'
         motor1.backward(speed=1)
         motor2.backward(speed=1)
     elif current == Left:
@@ -141,8 +142,11 @@ def move(msg, value):
             ledPin.off()
             print("led Off")
     elif msg =='drive':
-        if value == 'forward':
-            current = Forward
+        if value == 'stop':
+            current = idle
+            drive()
+        elif value =='backward':
+            current = Backward
             drive()
         elif value =='backward':
             current = Backward
