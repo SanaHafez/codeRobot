@@ -12,16 +12,16 @@ motor1 = Motor(forward=23, backward=24)
 motor2 = Motor(forward=25, backward=26)
 
 #cam pan tilt
-panServo =  AngularServo(26, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
-tiltServo =  AngularServo(27, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
+panServo =  AngularServo(27, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
+tiltServo =  AngularServo(28, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
 panServoAngle = 90
 tiltServoAngle = 90
 panServo.angle=panServoAngle
 tiltServo.angle=tiltServoAngle
 
 #stepper set up
-coil1 = Motor(forward=18, backward=23, pwm=False) #sensor stepper
-coil2 = Motor(forward=24, backward=17, pwm=False)
+coil1 = Motor(forward=18, backward=19, pwm=False) #sensor stepper
+coil2 = Motor(forward=20, backward=21, pwm=False)
 forward_seq = ['FF', 'BF', 'BB', 'FB']
 reverse_seq = list(forward_seq)  # to copy the list
 reverse_seq.reverse()
@@ -32,7 +32,7 @@ steps = 800 #stepper motor steps to bring sensor up aand down
 sensorpin=10 #Edit this to actual sensor pin
 
 led = "Off"
-ledPin = LED(21)
+ledPin = LED(22)
 
 def timerSensor():
     global current
