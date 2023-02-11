@@ -11,7 +11,7 @@ motor1 = Motor(forward=23, backward=24)
 motor2 = Motor(forward=25, backward=26)
 panServo =  AngularServo(26, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
 tiltServo =  AngularServo(27, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
-steps = 800
+
 coil1 = Motor(forward=18, backward=23, pwm=False) #sensor stepper
 coil2 = Motor(forward=24, backward=17, pwm=False)
 forward_seq = ['FF', 'BF', 'BB', 'FB']
@@ -19,10 +19,14 @@ reverse_seq = list(forward_seq)  # to copy the list
 reverse_seq.reverse()
 panServoAngle = 90
 tiltServoAngle = 90
+sensorpin=10 #Edit this to actual sensor pin
 panServo.angle=panServoAngle
 tiltServo.angle=tiltServoAngle
 led = "Off"
 ledPin = LED(21)
+
+steps = 800 #stepper motor steps to bring sensor up aand down
+
 def timerSensor():
     global current
     current = sensorOnstay
@@ -83,7 +87,6 @@ def drive():
         motor1.stop()
         motor2.stop()
     elif current == Forward:
-        camCurrent = camOnEntry
         motor1.forward(speed=1)
         motor2.forward(speed=1)
     elif current == Backward:
@@ -96,15 +99,6 @@ def drive():
         motor1.backward(speed=1)
         motor2.forward(speed=1)
 
-def sensorGoesDown():
-    for i in range(steps):
-        for step in forward_seq:
-            set_step(steps)
-
-def sensorGoesUp():
-    for i in range(steps):
-        for step in reverse_seq:
-            set_step(steps)
 
 def stepper():
     global current
@@ -123,9 +117,6 @@ def stepper():
     elif current == sensorUP:
         sensorGoesUp()
         current = sensorIdle
-while True:
-    drive()
-    stepper()
 
     templateData = {
         'panServoAngle': panServoAngle,
