@@ -3,41 +3,90 @@
 <html>
 <head>
 <title>Robot</title>
-<link rel= "stylesheet" href= '../static/style.css'>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+<style>
+h4 {
+color:#00530a
+}
+h3{
+color:#00530a
+}
+.mybutton{
+	background:#ffec64 100%;
+	background-color:#00aca4;
+}
+.mredb{background-color:#ac2500}
+button{
+	box-shadow: 0px 1px 0px 0px #f7c5c0;
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+
+button:hover {
+
+	background:#ffec64 100%;
+	background-color:#ffab23;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+</style>
 </head>
   <body>
     <h1>Irrigation Robot</h1>
-    <img src="http://192.168.0.173:8080/" style="float:left; width:100%; max-width: 200px; max-height:300px; border-radius:10px">
+<hr>
+   <h3>Live Cam</h3>
+    <img src="{{ url_for('static', filename='images/robot.jpeg') }}" style="float:center; width:100%; max-width: 500px;max-height:300px;border-radius:10px" >
+	
 	<hr>
-	<h4> PAN Angle: 
-		<button><a href="/pan/left" class="button">Left</a></button> [ {{ panServoAngle }} ] 
-		<button><a href="/pan/right" class="button">Right</a></button>  </h4>
+ 	<form action="/" method="POST">
+	<h4> Pan Camera:
+		<button name="action" type="submit" value="panleft">Left</button> [ {{ panServoAngle }} ] 
+		<button name="action" type="submit" value="panright">Right</button> </h4>  
 
-	<h4> TILT Angle: 
-		<button><a href="/tilt/down" class="button">Down</a></button>  [ {{ tiltServoAngle }} ] 
-		<button><a href="/tilt/up" class="button">Up</a></button>  </h4>
+	<h4> Tilt Camera: 
+		<button name="action" type="submit" value="tiltdown">Down</button>  [ {{ tiltServoAngle }} ] 
+		<button name="action" type="submit" value="tiltup">Up</button>  </h4>
 
 	 <h4> LED: 
-		<button><a href="/led/off" class="button">Off</a></button>  [ {{ led }} ]
-        <button><a href="/led/on" class="button">On</a></button>  </h4>
+		<button name="action" type="submit" value="ledoff">Off</button>  [ {{ led }} ]
+        	<button name="action" type="submit" value="ledon">On</button>  </h4>
 
 	<h3> Drive Status: {{ current1 }} </h3>
-        <button><a href="/drive/forward" class="button">Forward</a></button> 
+        	<button class="mybutton" name="action" type="submit" value="forward">Forward</button> 
         <h2>
-		<button><a href="/drive/left" class="button">Left</a></button> 
-		<button><a href="/drive/stop" class="button">Stop</a></button>
-		<button><a href="/drive/right" class="button">Right</a></button>  
+		<button class="mybutton" name="action" type="submit" value="left">Left</button> 
+		<button class="mredb" name="action" type="submit" value="stop">Stop</button>
+		<button class="mybutton" name="action" type="submit" value="right">Right</button>  
         </h2>
 		
-		<button><a href="/drive/backward" class="button">Backward</a> </button>  
+		<button class="mybutton" name="action" type="submit" value="backward">Backward </button>  
         <br>
-		
-	<h4> Sensor: 
-		<button><a href="/testSoil/on" class="button">Measure</a></button> </h4>
+	<div>	
+	<h4> Sensor: [{{sensor}}]
+		<button name="action" type="submit" value="soiltest">Measure</button> </h4>
+	<h4> Water plants: 
+		<button name="action" type="submit" value="sprinkleoff">Off</button>  [ {{ sprinkle }} ]
+        	<button name="action" type="submit" value="sprinkleon">On</button>  </h4>
+	</div>
+	</form>
+
 	<hr>
 	<p>@Developed by Sana Hafez</p>
+	
   </body>
 </html>
-
 
 
