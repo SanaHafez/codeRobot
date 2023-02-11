@@ -3,37 +3,41 @@
 <html>
 <head>
 <title>Robot</title>
-<link rel= "stylesheet" type= "css" href= "{{ url_for('static',filename='styles/style.css') }}">
+<link rel= "stylesheet" href= '../static/style.css'>
 </head>
   <body>
     <h1>Irrigation Robot</h1>
     <img src="http://192.168.0.173:8080/" style="float:left; width:100%; max-width: 200px; max-height:300px; border-radius:10px">
 	<hr>
 	<h4> PAN Angle: 
-		<a href="/pan/left" class="button">Left</a> [ {{ panServoAngle }} ] 
-		<a href="/pan/right" class="button">Right</a> </h4>
+		<button><a href="/pan/left" class="button">Left</a></button> [ {{ panServoAngle }} ] 
+		<button><a href="/pan/right" class="button">Right</a></button>  </h4>
 
 	<h4> TILT Angle: 
-		<a href="/tilt/down" class="button">Down</a> [ {{ tiltServoAngle }} ] 
-		<a href="/tilt/up" class="button">Up</a> </h4>
+		<button><a href="/tilt/down" class="button">Down</a></button>  [ {{ tiltServoAngle }} ] 
+		<button><a href="/tilt/up" class="button">Up</a></button>  </h4>
 
 	 <h4> LED: 
-		<a href="/led/off" class="button">Off</a> [ {{ led }} ]
-        <a href="/led/on" class="button">On</a> </h4>
+		<button><a href="/led/off" class="button">Off</a></button>  [ {{ led }} ]
+        <button><a href="/led/on" class="button">On</a></button>  </h4>
 
-	<h4> Drive: 
-		<a href="/drive/left" class="button">Left</a> [ {{ current1 }} ]  
-		<a href="/drive/right" class="button">Right</a> </h4>
-	<h4> Drive: 
-		<a href="/drive/forward" class="button">Forward</a> [ {{ current1 }} ]  
-		<a href="/drive/backward" class="button">Backward</a> </h4>
-	<h4> Drive: 
-		<a href="/drive/stop" class="button">Stop</a></h4>
+	<h3> Drive Status: {{ current1 }} </h3>
+        <button><a href="/drive/forward" class="button">Forward</a></button> 
+        <h2>
+		<button><a href="/drive/left" class="button">Left</a></button> 
+		<button><a href="/drive/stop" class="button">Stop</a></button>
+		<button><a href="/drive/right" class="button">Right</a></button>  
+        </h2>
+		
+		<button><a href="/drive/backward" class="button">Backward</a> </button>  
+        <br>
+		
 	<h4> Sensor: 
-		<a href="/testSoil/on" class="button">Measure</a></h4>
+		<button><a href="/testSoil/on" class="button">Measure</a></button> </h4>
 	<hr>
-	<p>Developed by Sana</p>
+	<p>@Developed by Sana Hafez</p>
   </body>
 </html>
+
 
 
