@@ -80,6 +80,29 @@ def stepper():
     elif current == sensorUP:
         sensorGoesUp()
         current = sensorIdle
+def drive():
+    global current
+    global current1
+    if current == idle:
+        current1='Idle'
+        motor1.stop()
+        motor2.stop()
+    elif current == Forward:
+        current1='Idle'
+        motor1.forward(speed=1)
+        motor2.forward(speed=1)
+    elif current == Backward:
+        current1='Forward'
+        motor1.backward(speed=1)
+        motor2.backward(speed=1)
+    elif current == Left:
+        current1='Left'
+        motor1.forward(speed=1)
+        motor2.backward(speed=1)
+    elif current == Right:
+        current1='Right'
+        motor1.backward(speed=1)
+        motor2.forward(speed=1)
 #page
 app = Flask(__name__)
 
@@ -133,27 +156,7 @@ def move(msg, value):
     elif msg == 'testSoil':
            current = sensorIdle
 
-    def drive():
-        if current == idle:
-            current1='Idle'
-            motor1.stop()
-            motor2.stop()
-        elif current == Forward:
-            current1='Idle'
-            motor1.forward(speed=1)
-            motor2.forward(speed=1)
-        elif current == Backward:
-            current1='Forward'
-            motor1.backward(speed=1)
-            motor2.backward(speed=1)
-        elif current == Left:
-            current1='Left'
-            motor1.forward(speed=1)
-            motor2.backward(speed=1)
-        elif current == Right:
-            current1='Right'
-            motor1.backward(speed=1)
-            motor2.forward(speed=1)
+    
 
     templateData = {
         'panServoAngle': panServoAngle,
