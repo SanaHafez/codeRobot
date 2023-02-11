@@ -12,7 +12,7 @@ current1="Idle"
 #dc motor
 motor1 = Motor(forward=23, backward=24)
 motor2 = Motor(forward=25, backward=26)
-pump=Motor(9)
+pump=Motor(forward=9, backward=10)
 
 #cam pan tilt
 panServo =  AngularServo(27, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
@@ -174,11 +174,11 @@ def index():
             sensor='sensorValue' ##Edit here
         elif msg == 'sprinkleon':
             sprinkle='On'
-            pump.on()
+            pump.forward()
             current = sensorIdle
         elif msg == 'sprinkleoff':
             sprinkle='Off'
-            pump.off()
+            pump.forward()
             current = sensorIdle
                
 
