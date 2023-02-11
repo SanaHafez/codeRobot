@@ -7,52 +7,51 @@
 
 <style>
 	body{
-		text-align:center
+		text-align:center;background:#FCFAE6
 	}
-h4 {
-color:#00530a
-}
-h3{
-color:#00530a
-}
-.mybutton{
-	background:#ffec64 100%;
-	background-color:#00aca4;
-}
-.mredb{background-color:#ac2500}
-.cent{background-color:#0079ad}
-button{
-	box-shadow: 0px 1px 0px 0px #f7c5c0;
-	background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-}
-
-button:hover {
-
-	background:#ffec64 100%;
-	background-color:#ffab23;
-}
-button:active {
-	position:relative;
-	top:1px;
-}
+	img{
+		float:center; width:100%; max-width: 500px;max-height:300px;border-radius:10px
+	}
+	h4 {
+	color:#00530a
+	}
+	h3{
+	color:#00530a
+	}
+	.mybutton{
+		background:#ffec64 100%; background-color:#00aca4;
+	}
+	.mredb{background-color:#ac2500}
+	.cent{background-color:#0079ad}
+	button{
+		box-shadow: 0px 1px 0px 0px #f7c5c0;
+		background-color:#44c767;
+		border-radius:28px;
+		border:1px solid #18ab29;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:15px;
+		font-weight:bold;
+		padding:6px 24px;
+		text-decoration:none;
+		text-shadow:0px 1px 0px #2f6627;
+	}
+	
+	button:hover {
+		background:#ffec64 100%;background-color:#ffab23;
+	}
+	button:active {
+		position:relative;top:1px;
+	}
 </style>
 </head>
   <body>
     <h1>Irrigation Robot</h1>
 <hr>
    <h3>Live Cam</h3>
-    <img src="{{ url_for('static', filename='images/robot.jpeg') }}" style="float:center; width:100%; max-width: 500px;max-height:300px;border-radius:10px" >
+    <img src="{{ url_for('static', filename='images/robot.jpeg') }}"  >
 	
 	<hr>
  	<form action="/" method="POST">
