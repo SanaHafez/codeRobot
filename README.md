@@ -1,2 +1,3 @@
 # codeRobot
-install flask
+install flask using:
+sudo pip install flask
