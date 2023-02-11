@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 
 <style>
+	body{
+		text-align:center
+	}
 h4 {
 color:#00530a
 }
@@ -17,6 +20,7 @@ color:#00530a
 	background-color:#00aca4;
 }
 .mredb{background-color:#ac2500}
+.cent{background-color:#0079ad}
 button{
 	box-shadow: 0px 1px 0px 0px #f7c5c0;
 	background-color:#44c767;
@@ -52,13 +56,17 @@ button:active {
 	
 	<hr>
  	<form action="/" method="POST">
-	<h4> Pan Camera:
-		<button name="action" type="submit" value="panleft">Left</button> [ {{ panServoAngle }} ] 
-		<button name="action" type="submit" value="panright">Right</button> </h4>  
+		<h4>Camera</h4>
+	<h2> Pan: [ {{ panServoAngle }} ], Tilt:  [ {{ tiltServoAngle }} ]  </h2> 
+		<h4><button name="action" type="submit" value="tiltup">Up</button> </h4>
+		<br>
+		<button name="action" type="submit" value="panleft">Left</button>
+		<button class="cent" name="action" type="submit" value="center">Center</button>
+		<button name="action" type="submit" value="panright">Right</button>  
 
-	<h4> Tilt Camera: 
-		<button name="action" type="submit" value="tiltdown">Down</button>  [ {{ tiltServoAngle }} ] 
-		<button name="action" type="submit" value="tiltup">Up</button>  </h4>
+	<h2> 
+		<button name="action" type="submit" value="tiltdown">Down</button> 
+		 </h2>
 
 	 <h4> LED: 
 		<button name="action" type="submit" value="ledoff">Off</button>  [ {{ led }} ]
