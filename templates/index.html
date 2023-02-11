@@ -21,9 +21,9 @@
 	.mybutton{
 		background:#ffec64 100%; background-color:#00aca4;
 	}
-	.mredb{background-color:#ac2500}
+	.mredb{background-color:#c82c01}
 	.cam{background-color:#346ac7}
-	.cent{background-color:#408c99}
+	.cent{background-color:#af5cde}
 	button{
 		box-shadow: 0px 1px 0px 0px #f7c5c0;
 		background-color:#1bb17d;
@@ -58,20 +58,19 @@
 	<hr>
  	<form action="/" method="POST">
 		<h4>Camera</h4>
-	<h5> Pan: [ {{ panServoAngle }} ], Tilt:  [ {{ tiltServoAngle }} ] (Degrees)  </h5> 
+		<h3>Camera</h3>
+		<p> Pan: {{ panServoAngle }} , Tilt:   {{ tiltServoAngle }} (Degrees)  </p> 
+	
 		<button class="cam" name="action" type="submit" value="tiltup">Up</button>
 		<br>
+
 		<h2>
 		<button class="cam" name="action" type="submit" value="panleft">Left</button>
 		<button class="cent" name="action" type="submit" value="center">Center</button>
 		<button class="cam" name="action" type="submit" value="panright">Right</button>  
-	</h2>
+		</h2>
 		<button class="cam" name="action" type="submit" value="tiltdown">Down</button> 
 		 
-
-	 <h4> Camera: 
-		<button name="action" type="submit" value="ledoff">Off</button>  [ {{ led }} ]
-        	<button name="action" type="submit" value="ledon">On</button>  </h4>
 
 	<h3> Drive Status: {{ current1 }} </h3>
         	<button class="mybutton" name="action" type="submit" value="forward">Forward</button> 
@@ -83,13 +82,17 @@
 		
 		<button class="mybutton" name="action" type="submit" value="backward">Backward </button>  
         <br>
-	<div>	
-	<h4> Sensor: [{{sensor}}]
-		<button name="action" type="submit" value="soiltest">Measure</button> </h4>
-	<h4> Water plants: 
-		<button name="action" type="submit" value="sprinkleoff">Off</button>  [ {{ sprinkle }} ]
-        	<button name="action" type="submit" value="sprinkleon">On</button>  </h4>
-	</div>
+		<div>	
+			<h4> Sensor: [{{sensor}}]
+			<button name="action" type="submit" value="soiltest">Measure</button> </h4>
+			<h4> Water plants: 
+			<button name="action" type="submit" value="sprinkleon">On</button> [ {{ sprinkle }} ]
+			<button class="mredb" name="action" type="submit" value="sprinkleoff">Off</button> 
+				</h4>
+			<h4> Camera: &nbsp &nbsp &nbsp &nbsp
+			<button name="action" type="submit" value="ledon">On</button> [ {{ led }} ]
+				<button class="mredb" name="action" type="submit" value="ledoff">Off</button> </h4>
+			</div>
 	</form>
 
 	<hr>
