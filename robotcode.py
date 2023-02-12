@@ -163,7 +163,10 @@ def index():
                 tiltServoAngle = tiltServoAngle + 10
         elif msg == 'tiltdown':
             if tiltServoAngle>50:
-                tiltServoAngle = tiltServoAngle - 10       
+                tiltServoAngle = tiltServoAngle - 10
+        elif msg == 'center':
+              panServoAngle = 0
+              tiltServoAngle = 0 
         elif msg == 'ledon':
             led = "On"
             ledPin.on()
