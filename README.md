@@ -9,4 +9,4 @@ $ python robotcode.py
 Find your rpi IP address from:
 $ ifconfig
 
-Open browser on: <rpi IP address>:8000
+Open browser on: (rpi IP address):8000
