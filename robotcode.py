@@ -150,7 +150,6 @@ def camAngle(msg): #adjust view angles
         if panServoAngle>50:
             panServoAngle = panServoAngle - 10        
     elif msg == 'tiltup':
-        current = idle
         if tiltServoAngle<100:
             tiltServoAngle = tiltServoAngle + 10
     elif msg == 'tiltdown':
