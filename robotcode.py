@@ -143,6 +143,8 @@ def sprinkleoff():
      Timer(5, waterTimer).start()
 
 def camAngle(msg): #adjust view angles
+    global panServoAngle
+    global tiltServoAngle
     if msg == 'panleft': 
         if panServoAngle<100:
             panServoAngle = panServoAngle + 10
@@ -167,8 +169,7 @@ sensor='Reading'
 app = Flask(__name__)
 @app.route('/',methods=["POST","GET"])
 def index():
-    global panServoAngle
-    global tiltServoAngle
+    
     global led
     global current
     global current1
