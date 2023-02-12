@@ -148,7 +148,7 @@ def index():
     global msg
     global sprinkle
     global sensor
-    if request.method == "POST":
+    if request.method == "POST": #gets the posted form action message from html page
         msg = request.form['action']    
         if msg == 'panleft':
             current=idle
