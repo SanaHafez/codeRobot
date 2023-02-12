@@ -97,6 +97,7 @@ def stepper():
 def drive():
     global current
     global current1
+    camAngle('center') #center camera while in drive mode
     if current == idle:
         current1='Stop'
         motor1.stop()
@@ -132,6 +133,24 @@ def sprinkleoff():
      GPIO.output(relaypin, GPIO.LOW)
      Timer(5, waterTimer).start()
 
+def camAngle(msg): #adjust view angles
+    if msg == 'panleft': 
+        if panServoAngle<100:
+            panServoAngle = panServoAngle + 10
+    elif msg == 'panright':
+        if panServoAngle>50:
+            panServoAngle = panServoAngle - 10        
+    elif msg == 'tiltup':
+        current = idle
+        if tiltServoAngle<100:
+            tiltServoAngle = tiltServoAngle + 10
+    elif msg == 'tiltdown':
+        if tiltServoAngle>50:
+            tiltServoAngle = tiltServoAngle - 10
+    elif msg == 'center':
+            panServoAngle = 0
+            tiltServoAngle = 0 
+
 #page
 mgs='idle'
 sprinkle='Off'
@@ -150,23 +169,10 @@ def index():
     global sensor
     if request.method == "POST": #gets the posted form action message from html page
         msg = request.form['action']    
-        if msg == 'panleft':
+        if msg == 'panleft' or 'panright' or 'tiltup' or 'tiltdown' or 'center':
             current=idle
-            if panServoAngle<100:
-                panServoAngle = panServoAngle + 10
-        elif msg == 'panright':
-            if panServoAngle>50:
-                panServoAngle = panServoAngle - 10        
-        elif msg == 'tiltup':
-            current = idle
-            if tiltServoAngle<100:
-                tiltServoAngle = tiltServoAngle + 10
-        elif msg == 'tiltdown':
-            if tiltServoAngle>50:
-                tiltServoAngle = tiltServoAngle - 10
-        elif msg == 'center':
-              panServoAngle = 0
-              tiltServoAngle = 0 
+            drive() #car wont move while angle is adjusted
+            camAngle(msg)
         elif msg == 'ledon':
             led = "On"
             ledPin.on()
