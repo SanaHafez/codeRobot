@@ -1,5 +1,5 @@
 # codeRobot
-install flask using:
+Install flask using:
 $ sudo pip install flask
 
 Go to directory of the code then
