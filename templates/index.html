@@ -52,12 +52,11 @@
   <body>
     <h1>Irrigation Robot</h1>
 	<hr>
-   <h3>Live Cam</h3>
+   <h3>Live Camera</h3>
     <img src="{{ url_for('static', filename='images/robot.jpeg') }}"  >
 	
 	<hr>
  	<form action="/" method="POST">
-		<h4>Camera</h4>
 		<h3>Camera</h3>
 		<p> Pan: {{ panServoAngle }} , Tilt:   {{ tiltServoAngle }} (Degrees)  </p> 
 	
