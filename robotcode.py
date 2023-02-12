@@ -93,6 +93,11 @@ def stepper():
         sensorGoesUp()
         current = sensorIdle
 
+def driveTimer():
+    global current
+    current=idle
+    drive()
+
 
 def drive():
     global current
@@ -106,18 +111,22 @@ def drive():
         current1='Forward'
         motor1.forward(speed=1)
         motor2.forward(speed=1)
+        Timer(10, driveTimer).start()
     elif current == Backward:
         current1='Backward'
         motor1.backward(speed=1)
         motor2.backward(speed=1)
+        Timer(10, driveTimer).start()
     elif current == Left:
         current1='Left'
         motor1.forward(speed=1)
         motor2.backward(speed=1)
+        Timer(2, driveTimer).start()
     elif current == Right:
         current1='Right'
         motor1.backward(speed=1)
         motor2.forward(speed=1)
+        Timer(2, driveTimer).start()
 
 def waterTimer():
     global current
