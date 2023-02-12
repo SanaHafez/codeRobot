@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, make_response
 import time
+from threading import Timer
 import os
 import RPi.GPIO as GPIO
 from gpiozero import LED, Motor, Button, AngularServo
@@ -12,7 +13,6 @@ current1="Idle"
 #dc motor
 motor1 = Motor(forward=23, backward=24)
 motor2 = Motor(forward=25, backward=26)
-pump=Motor(forward=9, backward=10)
 
 #cam pan tilt
 panServo =  AngularServo(27, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000)
@@ -30,7 +30,10 @@ reverse_seq = list(forward_seq)  # to copy the list
 reverse_seq.reverse()
 steps = 800 #stepper motor steps to bring sensor up aand down
 
-
+#Relay for pump
+GPIO.setmode(GPIO.BCM)
+relaypin = 9
+GPIO.setup(relaypin, GPIO.OUT)
 #Sensor set up
 sensorpin=10 #Edit this to actual sensor pin
 
@@ -65,15 +68,21 @@ def sensorGoesUp():
     for i in range(steps):
         for step in reverse_seq:
             set_step(step)
+
+def sensorTimer():
+    global current
+    current=sensorUP
+
 def stepper():
     global current
     if current == sensorIdle:
         set_step('S')
-        print("Idle")
+        print("sensorIdle")
     elif current == sensorDown:
         sensorGoesDown()
         current = sensorOnstay
     elif current == sensorOnstay:
+        Timer(5, sensorTimer).start()
         moisturevalue = GPIO.input(sensorpin) #Change this code to sensor code
         if moisturevalue == 0:
             print("Moisture detected")
@@ -83,6 +92,7 @@ def stepper():
     elif current == sensorUP:
         sensorGoesUp()
         current = sensorIdle
+
 
 def drive():
     global current
@@ -107,12 +117,27 @@ def drive():
         current1='Right'
         motor1.backward(speed=1)
         motor2.forward(speed=1)
+
+def waterTimer():
+    global current
+    sprinkleoff()
+    current = idle
+    drive()
+
+def sprinkleon():
+    GPIO.output(relaypin, GPIO.HIGH)
+    Timer(5, waterTimer).start()
+
+def sprinkleoff():
+     GPIO.output(relaypin, GPIO.LOW)
+     Timer(5, waterTimer).start()
+
 #page
 mgs='idle'
 sprinkle='Off'
 sensor='Reading'
-app = Flask(__name__)
 
+app = Flask(__name__)
 @app.route('/',methods=["POST","GET"])
 def index():
     global panServoAngle
@@ -124,28 +149,21 @@ def index():
     global sprinkle
     global sensor
     if request.method == "POST":
-        msg = request.form['action']
-    #return render_template('index.html')
-
-#@app.route('/<msg>/<value>')
-#def move(msg, value):
-    
+        msg = request.form['action']    
         if msg == 'panleft':
             current=idle
             if panServoAngle<100:
                 panServoAngle = panServoAngle + 10
         elif msg == 'panright':
             if panServoAngle>50:
-                panServoAngle = panServoAngle - 10
-    # os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+                panServoAngle = panServoAngle - 10        
         elif msg == 'tiltup':
             current = idle
             if tiltServoAngle<100:
                 tiltServoAngle = tiltServoAngle + 10
         elif msg == 'tiltdown':
             if tiltServoAngle>50:
-                tiltServoAngle = tiltServoAngle - 10
-    # os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+                tiltServoAngle = tiltServoAngle - 10       
         elif msg == 'ledon':
             led = "On"
             ledPin.on()
@@ -170,18 +188,16 @@ def index():
             current = Right
             drive()
         elif msg == 'soiltest':
-            current = sensorIdle
+            current = sensorDown
+            stepper()
             sensor='sensorValue' ##Edit here
         elif msg == 'sprinkleon':
             sprinkle='On'
-            pump.forward()
-            current = sensorIdle
+            sprinkleon()  
         elif msg == 'sprinkleoff':
             sprinkle='Off'
-            pump.forward()
-            current = sensorIdle
+            sprinkleoff()
                
-
 
     templateData = {
         'panServoAngle': panServoAngle,
@@ -191,11 +207,26 @@ def index():
         'sprinkle' : sprinkle,
         'sensor': sensor
     }
-    # response = make_response(redirect(url_for('index')))
-    # return(response)
+    
 
     return render_template('index.html', **templateData)
 
 if __name__ == '__main__':
     os.system("sudo rm -r  ~/.cache/chromium/Default/Cache/*")
     app.run(debug=True, host='0.0.0.0', port=8000, threaded=True)
+
+
+
+
+
+
+# response = make_response(redirect(url_for('index')))
+    # return(response)
+    
+# os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+
+
+  #return render_template('index.html')
+
+#@app.route('/<msg>/<value>')
+#def move(msg, value):
