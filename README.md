@@ -10,3 +10,6 @@ Find your rpi IP address from:
 $ ifconfig
 
 Open browser on: (rpi IP address):8000
+## Demo
+
+![Robot Web Interface](images/html.png)
